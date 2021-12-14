@@ -1,6 +1,6 @@
 ---
-name: Rework request
-about: Suggest a rework for this project
+name: Removed request
+about: Suggest a removed for this project
 title: ''
 labels: ''
 assignees: ''
@@ -27,31 +27,27 @@ This is important in case the issue is not reproducible except for under certain
 * SDK version:
 * Toolchain version:
 
-**2. New solution**
-
-A clear and concise description of what you want to happen.
-
-**3. Additional context**
+**2. Additional context**
 
 Add any other context or screenshots about the feature request here.
 
-**4. Tests**
+**3. Tests**
 
 A clear and concise description of what it is required to tests.
 Verify existing tests are sufficient to satisfy the no regression on this project.
 
-**4. a. Unit tests**
+**3. a. Unit tests**
 
 A clear and concise description of unit tests.
 
-**4. b. Functional tests**
+**3. b. Functional tests**
 
 A clear and concise description of functional tests.
 
-**4. c. No regression tests**
+**3. c. No regression tests**
 
 A clear and concise description of no regression tests.
 
-**5. To do**
+**4. To do**
 
 List the step to implement the solution

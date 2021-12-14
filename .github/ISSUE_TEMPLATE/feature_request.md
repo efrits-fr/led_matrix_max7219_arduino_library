@@ -69,14 +69,15 @@ Add any other context or screenshots about the feature request here.
 **9. Tests**
 
 A clear and concise description of what it is required to tests.
+Verify existing tests are sufficient to satisfy the no regression on this project.
 
 **9. a. Unit tests**
 
 A clear and concise description of unit tests.
 
-**9. b. Functionnal tests**
+**9. b. Functional tests**
 
-A clear and concise description of functionnal tests.
+A clear and concise description of functional tests.
 
 **9. c. No regression tests**
 
