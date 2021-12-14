@@ -7,32 +7,94 @@ assignees: ''
 
 ---
 
-**Describe the bug**
+**0. Prerequisites**
+
+Please answer the following questions for yourself before submitting an issue. 
+YOU MAY DELETE THE PREREQUISITES SECTION.
+
+- [ ] I am running the latest version
+- [ ] I checked the documentation and found no answer
+- [ ] I checked to make sure that this issue has not already been filed
+- [ ] I'm reporting the issue to the correct repository (for multi-repository projects)
+
+**1. Context**
+
+Describe the bug
 A clear and concise description of what the bug is.
 
-**To Reproduce**
+**1. a. Desktop**
+
+- OS: [e.g. iOS]
+- Browser [e.g. chrome, safari]
+- Version [e.g. 22]
+
+**1. b. Smartphone**
+
+- Device: [e.g. iPhone6]
+- OS: [e.g. iOS8.1]
+- Browser [e.g. stock browser, safari]
+- Version [e.g. 22]
+
+**2. Expected behavior**
+
+A clear and concise description of what you expected to happen.
+
+**3. Current Behavior**
+
+What is the current behavior ?
+
+**4. Related bug**
+
+Please help provide information about the bug.
+
+**4. a. Steps to reproduce the bug**
+
 Steps to reproduce the behavior:
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
 4. See error
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**4. b. Failure Logs**
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+Please include any relevant log snippets or files here.
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+**4. c. Screenshots**
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+If applicable, add screenshots to help explain your bug.
 
-**Additional context**
+**5. Solution**
+
+A clear and concise description of what you want to happen.
+
+**6. Alternative**
+
+A clear and concise description of any alternative solutions or features you've considered.
+
+**7. Work around**
+
+Possible work around waiting for the resolution of the problem
+
+**8. Additional context**
+
 Add any other context about the problem here.
+
+**9. Tests**
+
+A clear and concise description of what it is required to tests.
+
+**9. a. Unit tests**
+
+A clear and concise description of unit tests.
+
+**9. b. Functionnal tests**
+
+A clear and concise description of functionnal tests.
+
+**9. c. No regression tests**
+
+A clear and concise description of no regression tests.
+
+**10. To do**
+
+List the step to implement the solution

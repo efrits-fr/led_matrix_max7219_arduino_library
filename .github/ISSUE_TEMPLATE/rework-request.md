@@ -1,6 +1,6 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
+name: Rework request
+about: Suggest a rework for this project
 title: ''
 labels: ''
 assignees: ''
@@ -11,6 +11,7 @@ assignees: ''
 
 Please answer the following questions for yourself before submitting an issue. 
 YOU MAY DELETE THE PREREQUISITES SECTION.
+
 - [ ] I am running the latest version
 - [ ] I checked the documentation and found no answer
 - [ ] I checked to make sure that this issue has not already been filed
@@ -26,62 +27,30 @@ This is important in case the issue is not reproducible except for under certain
 * SDK version:
 * Toolchain version:
 
-**2. Expected Behavior**
-
-Please describe the behavior you are expecting
-
-**3. Current Behavior**
-
-What is the current behavior ?
-
-**4. Related problem**
-
-Is your feature request related to a problem ?
-Please help provide information about the problem.
-
-**4. a. Steps to reproduce the problem**
-
-Please provide detailed steps for reproducing the issue.
-1. step 1
-2. step 2
-3. ...
-
-**4. b. Failure Logs**
-
-Please include any relevant log snippets or files here.
-
-**5. Solution**
+**2. New solution**
 
 A clear and concise description of what you want to happen.
 
-**6. Alternative**
-
-A clear and concise description of any alternative solutions or features you've considered.
-
-**7. Work around**
-
-Possible work around waiting for the resolution of the problem
-
-**8. Additional context**
+**3. Additional context**
 
 Add any other context or screenshots about the feature request here.
 
-**9. Tests**
+**4. Tests**
 
 A clear and concise description of what it is required to tests.
 
-**9. a. Unit tests**
+**4. a. Unit tests**
 
 A clear and concise description of unit tests.
 
-**9. b. Functionnal tests**
+**4. b. Functionnal tests**
 
 A clear and concise description of functionnal tests.
 
-**9. c. No regression tests**
+**4. c. No regression tests**
 
 A clear and concise description of no regression tests.
 
-**10. To do**
+**5. To do**
 
 List the step to implement the solution
