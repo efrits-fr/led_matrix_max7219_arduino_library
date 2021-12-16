@@ -1,6 +1,6 @@
 ---
-name: Remove request
-about: Suggest a deletion for this project
+name: Deprecation request
+about: Suggest a deprecation for this project
 title: ''
 labels: ''
 assignees: ''

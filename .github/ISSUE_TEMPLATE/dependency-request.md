@@ -1,6 +1,6 @@
 ---
 name: Dependency request
-about: Describe this issue template's purpose here.
+about: Suggest a new dependency version for this project
 title: ''
 labels: ''
 assignees: ''
