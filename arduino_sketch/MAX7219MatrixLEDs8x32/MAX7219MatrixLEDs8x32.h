@@ -62,7 +62,7 @@ private:
   static byte const maxDigit   = 8;
   static byte const maxSegment = 4;
   
-  static byte const digits[8] =
+  byte const digits[8] =
   { 
     digit0Register,
     digit1Register,
