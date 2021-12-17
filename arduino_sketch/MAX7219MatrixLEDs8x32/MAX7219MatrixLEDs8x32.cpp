@@ -15,6 +15,8 @@ void MAX7219MatrixLEDs8x32::init()
   
   delay(50);
   initMax7219Component();
+
+  displayScreen();
 }
 
 void MAX7219MatrixLEDs8x32::initPins()
