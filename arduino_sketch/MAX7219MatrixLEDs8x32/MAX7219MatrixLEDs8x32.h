@@ -18,8 +18,14 @@ public:
 
   void init();
 
-  void putPixel(byte indexDigit, byte indexSegment, byte pixel);
+  void setPixelRange(byte x, byte y, byte colorBitfield);
+  void setPixel(byte x, byte y, byte color);
+  byte getPixel(byte x, byte y) const;
+  byte getWidth(void) const;
+  byte getHeight(void) const;
   void displayScreen();
+
+  void intensity(byte a, byte b, byte c, byte d);
 
 private:
   void initMax7219Component();
@@ -34,9 +40,9 @@ private:
   
   void blankSegment(byte indexSegment);
 
-  static byte const clockPin      = 13;
-  static byte const dataInPin     = 11;
-  static byte const chipSelectPin = 10;
+  static byte const clockPin      = 10;
+  static byte const chipSelectPin = 11;
+  static byte const dataInPin     = 12;
     
   static byte const noOpRegister        = 0x00;
   static byte const digit0Register      = 0x01;
@@ -86,5 +92,7 @@ private:
     {0X00, 0X00, 0X00, 0X00 }
   };
 };
+
+extern MAX7219MatrixLEDs8x32 matrix;
 
 #endif // MAX7219_MATRIX_LEDS_8X32_H
