@@ -10,12 +10,8 @@
 
 void MAX7219MatrixLEDs8x32::init()
 {
-  delay(50);
   initPins();
-
-  delay(50);
   initMax7219Component();
-
   displayScreen();
 }
 
@@ -24,6 +20,17 @@ void MAX7219MatrixLEDs8x32::initPins()
   pinMode(clockPin, OUTPUT);
   pinMode(chipSelectPin, OUTPUT);
   pinMode(dataInPin, OUTPUT);
+  delay(200);
+}
+
+void MAX7219MatrixLEDs8x32::initMax7219Component()
+{
+  writeToRegister(decodeModeRegister,  usingLedMatrix);
+  writeToRegister(intensityRegister,   intensityOfBrightness);
+  writeToRegister(scanLimitRegister,   scan8LEDs);
+  writeToRegister(shutdownRegister,    normalMode);
+  writeToRegister(displayTestRegister, displayMode);
+  delay(200);
 }
 
 void MAX7219MatrixLEDs8x32::sendBytesToMax7219(byte data)
@@ -45,14 +52,6 @@ void MAX7219MatrixLEDs8x32::writeToRegister(byte registerNumber, byte data)
   digitalWrite(chipSelectPin, HIGH);
 }
 
-void MAX7219MatrixLEDs8x32::initMax7219Component()
-{
-  writeToRegister(decodeModeRegister,  usingLedMatrix);
-  writeToRegister(intensityRegister,   intensityOfBrightness);
-  writeToRegister(scanLimitRegister,   scan8LEDs);
-  writeToRegister(shutdownRegister,    normalMode);
-  writeToRegister(displayTestRegister, displayMode);
-}
 
 void MAX7219MatrixLEDs8x32::writeToNextSegment(byte digitRegister, byte data)
 {
@@ -72,22 +71,21 @@ void MAX7219MatrixLEDs8x32::endWriteLine()
 
 void MAX7219MatrixLEDs8x32::displayScreen()
 {
-  for (byte indexDigit = 0; indexDigit < maxDigit; ++indexDigit)
+  for (byte y = 0; y < maxDigit; ++y)
   {
     beginWriteLine();
-    for (byte indexSegment = 0; indexSegment < maxSegment; ++indexSegment)
-    {
-      writeToNextSegment(digits[indexDigit], matrix[indexDigit][indexSegment]);
-    }
+    for (byte x = 0; x < maxSegment; ++x)
+      writeToNextSegment(digits[y], matrix[y][x]);
     endWriteLine();
   }
 }
 
 void MAX7219MatrixLEDs8x32::blankSegment(byte indexSegment)
 {
-  for (byte indexDigit = 0; indexDigit < maxDigit; ++indexDigit)
+  for (byte y = 0; y < getHeight(); ++y)
+    for (byte x = 0; x < maxSegment; ++x)
   {
-    setPixelRange(indexSegment, indexDigit, 0x00);
+    setPixelRange(x, y, 0x00);
   }
 }
 

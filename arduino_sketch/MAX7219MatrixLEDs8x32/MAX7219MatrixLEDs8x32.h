@@ -38,9 +38,9 @@ private:
   
   void blankSegment(byte indexSegment);
 
-  static byte const clockPin      = 13;
-  static byte const dataInPin     = 11;
-  static byte const chipSelectPin = 10;
+  static byte const clockPin      = 10;
+  static byte const chipSelectPin = 11;
+  static byte const dataInPin     = 12;
     
   static byte const noOpRegister        = 0x00;
   static byte const digit0Register      = 0x01;
