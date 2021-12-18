@@ -1,7 +1,7 @@
 /*
  * Lisa Monpierre
  * EFRITS SAS
- * 
+ *
  * MAX7219 Library
  * Dec. 2021
  */
@@ -10,14 +10,22 @@
 
 MAX7219MatrixLEDs8x32 matrix;
 
-void setup() 
+void setup()
 {
   Serial.begin(9600);
   matrix.init();
 }
 
-void loop() 
+void loop()
 {
-  matrix.putPixel(1, 1, B11111111);
+  matrix.setPixelRange(0, 0, 255);
+  for (byte i = 0; i < 3; ++i)
+    {
+      byte x = random(matrix.getWidth());
+      byte y = random(matrix.getHeight());
+
+      matrix.setPixel(x, y, random(1));
+    }
   matrix.displayScreen();
+  delay(50);
 }

@@ -1,7 +1,7 @@
 /*
  * Lisa Monpierre
  * EFRITS SAS
- * 
+ *
  * MAX7219 Library
  * Dec. 2021
  */
@@ -12,7 +12,7 @@ void MAX7219MatrixLEDs8x32::init()
 {
   delay(50);
   initPins();
-  
+
   delay(50);
   initMax7219Component();
 
@@ -26,7 +26,7 @@ void MAX7219MatrixLEDs8x32::initPins()
   pinMode(dataInPin, OUTPUT);
 }
 
-void MAX7219MatrixLEDs8x32::sendBytesToMax7219(byte data) 
+void MAX7219MatrixLEDs8x32::sendBytesToMax7219(byte data)
 {
   for (byte i = 0; i < 8; ++i)
   {
@@ -87,11 +87,42 @@ void MAX7219MatrixLEDs8x32::blankSegment(byte indexSegment)
 {
   for (byte indexDigit = 0; indexDigit < maxDigit; ++indexDigit)
   {
-    putPixel(indexDigit, indexSegment, 0x00);
+    setPixelRange(indexSegment, indexDigit, 0x00);
   }
 }
 
-void MAX7219MatrixLEDs8x32::putPixel(byte indexDigit, byte indexSegment, byte pixel)
+void MAX7219MatrixLEDs8x32::setPixelRange(byte x, byte y, byte colorBitfield)
 {
-  matrix[indexDigit][indexSegment] = pixel;
+  matrix[y][x] = colorBitfield;
+}
+
+void MAX7219MatrixLEDs8x32::setPixel(byte x, byte y, byte color)
+{
+  byte bloc = x >> 3;
+  byte pixel = x - (bloc << 3);
+  byte *target = &matrix[y][bloc];
+
+  if (color)
+    *target |= 1 << pixel;
+  else
+    *target &= ~(1 << pixel);
+}
+
+byte MAX7219MatrixLEDs8x32::getPixel(byte x, byte y) const
+{
+  byte bloc = x >> 3;
+  byte pixel = x - (bloc << 3);
+  const byte *target = &matrix[y][bloc];
+
+  return ((*target >> pixel) & 1);
+}
+
+byte MAX7219MatrixLEDs8x32::getWidth(void) const
+{
+  return (maxSegment * 8);
+}
+
+byte MAX7219MatrixLEDs8x32::getHeight(void) const
+{
+  return (maxDigit);
 }

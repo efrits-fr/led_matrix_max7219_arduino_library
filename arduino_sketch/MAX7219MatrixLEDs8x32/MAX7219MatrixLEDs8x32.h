@@ -18,7 +18,11 @@ public:
 
   void init();
 
-  void putPixel(byte indexDigit, byte indexSegment, byte pixel);
+  void setPixelRange(byte x, byte y, byte colorBitfield);
+  void setPixel(byte x, byte y, byte color);
+  byte getPixel(byte x, byte y) const;
+  byte getWidth(void) const;
+  byte getHeight(void) const;
   void displayScreen();
 
 private:
