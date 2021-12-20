@@ -17,6 +17,6 @@ void setup()
 
 void loop() 
 {
-  matrix.putPixel(1, 1, B11111111);
+  matrix.setPixelRange(1, 1, B11111111);
   matrix.displayScreen();
 }
