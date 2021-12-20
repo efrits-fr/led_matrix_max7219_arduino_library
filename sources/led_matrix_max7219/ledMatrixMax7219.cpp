@@ -6,9 +6,9 @@
  * Dec. 2021
  */
 
-#include "MAX7219MatrixLEDs8x32.h"
+#include "ledMatrixMax7219.h"
 
-void MAX7219MatrixLEDs8x32::init()
+void LedMatrixMax7219::init()
 {
   delay(50);
   initPins();
@@ -19,14 +19,14 @@ void MAX7219MatrixLEDs8x32::init()
   displayScreen();
 }
 
-void MAX7219MatrixLEDs8x32::initPins()
+void LedMatrixMax7219::initPins()
 {
   pinMode(clockPin, OUTPUT);
   pinMode(chipSelectPin, OUTPUT);
   pinMode(dataInPin, OUTPUT);
 }
 
-void MAX7219MatrixLEDs8x32::sendBytesToMax7219(byte data) 
+void LedMatrixMax7219::sendBytesToMax7219(byte data)
 {
   for (byte i = 0; i < 8; ++i)
   {
@@ -37,7 +37,7 @@ void MAX7219MatrixLEDs8x32::sendBytesToMax7219(byte data)
    }
 }
 
-void MAX7219MatrixLEDs8x32::writeToRegister(byte registerNumber, byte data)
+void LedMatrixMax7219::writeToRegister(byte registerNumber, byte data)
 {
   digitalWrite(chipSelectPin, LOW);
   sendBytesToMax7219(registerNumber);
@@ -45,7 +45,7 @@ void MAX7219MatrixLEDs8x32::writeToRegister(byte registerNumber, byte data)
   digitalWrite(chipSelectPin, HIGH);
 }
 
-void MAX7219MatrixLEDs8x32::initMax7219Component()
+void LedMatrixMax7219::initMax7219Component()
 {
   writeToRegister(decodeModeRegister,  usingLedMatrix);
   writeToRegister(intensityRegister,   intensityOfBrightness);
@@ -54,23 +54,23 @@ void MAX7219MatrixLEDs8x32::initMax7219Component()
   writeToRegister(displayTestRegister, displayMode);
 }
 
-void MAX7219MatrixLEDs8x32::writeToNextSegment(byte digitRegister, byte data)
+void LedMatrixMax7219::writeToNextSegment(byte digitRegister, byte data)
 {
   sendBytesToMax7219(digitRegister);
   sendBytesToMax7219(data);
 }
 
-void MAX7219MatrixLEDs8x32::beginWriteLine()
+void LedMatrixMax7219::beginWriteLine()
 {
   digitalWrite(chipSelectPin, LOW);
 }
 
-void MAX7219MatrixLEDs8x32::endWriteLine()
+void LedMatrixMax7219::endWriteLine()
 {
   digitalWrite(chipSelectPin, HIGH);
 }
 
-void MAX7219MatrixLEDs8x32::displayScreen()
+void LedMatrixMax7219::displayScreen()
 {
   for (byte indexDigit = 0; indexDigit < maxDigit; ++indexDigit)
   {
@@ -83,7 +83,7 @@ void MAX7219MatrixLEDs8x32::displayScreen()
   }
 }
 
-void MAX7219MatrixLEDs8x32::blankSegment(byte indexSegment)
+void LedMatrixMax7219::blankSegment(byte indexSegment)
 {
   for (byte indexDigit = 0; indexDigit < maxDigit; ++indexDigit)
   {
@@ -91,7 +91,7 @@ void MAX7219MatrixLEDs8x32::blankSegment(byte indexSegment)
   }
 }
 
-void MAX7219MatrixLEDs8x32::putPixel(byte indexDigit, byte indexSegment, byte pixel)
+void LedMatrixMax7219::putPixel(byte indexDigit, byte indexSegment, byte pixel)
 {
   matrix[indexDigit][indexSegment] = pixel;
 }
