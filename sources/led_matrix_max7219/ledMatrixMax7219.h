@@ -16,8 +16,14 @@ class LedMatrixMax7219
 public:
   void init();
 
-  void putPixel(byte indexDigit, byte indexSegment, byte pixel);
-  void displayScreen();
+  void setPixel(byte x, byte y, byte color);
+  byte getPixel(byte x, byte y) const;
+  void setIntensity(byte a, byte b, byte c, byte d);
+  void setPixelRange(byte x, byte y, byte colorBitfield);
+
+  void displayScreen() const;
+  byte getWidth() const;
+  byte getHeight() const;
 
 private:
   void initMax7219Component();
@@ -26,16 +32,16 @@ private:
   void sendBytesToMax7219(byte data);
   void writeToRegister(byte registerNumber, byte data);
   void writeToNextSegment(byte digitRegister, byte data);
-  
+
   void beginWriteLine();
   void endWriteLine();
-  
+
   void blankSegment(byte indexSegment);
 
-  static byte const clockPin      = 13;
-  static byte const dataInPin     = 11;
-  static byte const chipSelectPin = 10;
-    
+  static byte const clockPin      = 10;
+  static byte const chipSelectPin = 11;
+  static byte const dataInPin     = 12;
+
   static byte const noOpRegister        = 0x00;
   static byte const digit0Register      = 0x01;
   static byte const digit1Register      = 0x02;
@@ -50,16 +56,16 @@ private:
   static byte const scanLimitRegister   = 0x0B;
   static byte const shutdownRegister    = 0x0C;
   static byte const displayTestRegister = 0x0F; 
-  
+
   static byte const usingLedMatrix        = 0x00; // Not digits model
   static byte const intensityOfBrightness = 0x01; // Range 0x00 - 0x01
   static byte const scan8LEDs             = 0x07;
   static byte const normalMode            = 0x01; // For shutdown/power-down mode set 0
   static byte const displayMode           = 0x00; // For test display mode set 1
-  
+
   static byte const maxDigit   = 8;
   static byte const maxSegment = 4;
-  
+
   byte const digits[8] =
   { 
     digit0Register,
