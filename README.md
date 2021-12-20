@@ -1,1 +1,1 @@
-# MAX7219_LEDs_Matrix_8x32_Arduino
+# led_matrix_max7219_arduino_library
