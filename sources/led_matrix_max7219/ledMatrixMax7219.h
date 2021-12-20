@@ -6,16 +6,14 @@
  * Dec. 2021
  */
 
-#ifndef MAX7219_MATRIX_LEDS_8X32_H
-#define MAX7219_MATRIX_LEDS_8X32_H
+#ifndef LED_MATRIX_MAX7219_H_
+#define LED_MATRIX_MAX7219_H_
 
 #include <Arduino.h>
 
-class MAX7219MatrixLEDs8x32
+class LedMatrixMax7219
 {
 public:
-  ~MAX7219MatrixLEDs8x32() = default;
-
   void init();
 
   void putPixel(byte indexDigit, byte indexSegment, byte pixel);
@@ -87,4 +85,4 @@ private:
   };
 };
 
-#endif // MAX7219_MATRIX_LEDS_8X32_H
+#endif // LED_MATRIX_MAX7219_H_

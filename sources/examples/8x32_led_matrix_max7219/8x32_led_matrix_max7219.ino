@@ -6,13 +6,12 @@
  * Dec. 2021
  */
 
-#include "MAX7219MatrixLEDs8x32.h"
+#include <ledMatrixMax7219.h>
 
-MAX7219MatrixLEDs8x32 matrix;
+LedMatrixMax7219 matrix;
 
 void setup() 
 {
-  Serial.begin(9600);
   matrix.init();
 }
 
