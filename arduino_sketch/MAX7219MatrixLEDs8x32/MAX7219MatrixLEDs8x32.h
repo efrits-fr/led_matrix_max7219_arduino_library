@@ -25,7 +25,7 @@ public:
   byte getHeight(void) const;
   void displayScreen();
 
-  void intensity(byte a, byte b, byte c, byte d);
+  void setIntensity(byte a, byte b, byte c, byte d);
 
 private:
   void initMax7219Component();

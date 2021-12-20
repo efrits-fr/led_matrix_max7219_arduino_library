@@ -33,7 +33,7 @@ void MAX7219MatrixLEDs8x32::initMax7219Component()
   delay(500);
 }
 
-void MAX7219MatrixLEDs8x32::intensity(byte a, byte b, byte c, byte d)
+void MAX7219MatrixLEDs8x32::setIntensity(byte a, byte b, byte c, byte d)
 {
   digitalWrite(chipSelectPin, LOW);
   writeToRegister(intensityRegister, a);
