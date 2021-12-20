@@ -20,7 +20,7 @@ void MAX7219MatrixLEDs8x32::initPins()
   pinMode(clockPin, OUTPUT);
   pinMode(chipSelectPin, OUTPUT);
   pinMode(dataInPin, OUTPUT);
-  delay(200);
+  delay(500);
 }
 
 void MAX7219MatrixLEDs8x32::initMax7219Component()
@@ -30,7 +30,17 @@ void MAX7219MatrixLEDs8x32::initMax7219Component()
   writeToRegister(scanLimitRegister,   scan8LEDs);
   writeToRegister(shutdownRegister,    normalMode);
   writeToRegister(displayTestRegister, displayMode);
-  delay(200);
+  delay(500);
+}
+
+void MAX7219MatrixLEDs8x32::intensity(byte a, byte b, byte c, byte d)
+{
+  digitalWrite(chipSelectPin, LOW);
+  writeToRegister(intensityRegister, a);
+  writeToRegister(intensityRegister, b);
+  writeToRegister(intensityRegister, c);
+  writeToRegister(intensityRegister, d);
+  digitalWrite(chipSelectPin, HIGH);
 }
 
 void MAX7219MatrixLEDs8x32::sendBytesToMax7219(byte data)
@@ -101,9 +111,9 @@ void MAX7219MatrixLEDs8x32::setPixel(byte x, byte y, byte color)
   byte *target = &matrix[y][bloc];
 
   if (color)
-    *target |= 1 << pixel;
+    *target |= 128 >> pixel;
   else
-    *target &= ~(1 << pixel);
+    *target &= ~(128 >> pixel);
 }
 
 byte MAX7219MatrixLEDs8x32::getPixel(byte x, byte y) const

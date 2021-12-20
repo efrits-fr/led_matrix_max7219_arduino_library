@@ -25,6 +25,8 @@ public:
   byte getHeight(void) const;
   void displayScreen();
 
+  void intensity(byte a, byte b, byte c, byte d);
+
 private:
   void initMax7219Component();
   void initPins();
@@ -90,5 +92,7 @@ private:
     {0X00, 0X00, 0X00, 0X00 }
   };
 };
+
+extern MAX7219MatrixLEDs8x32 matrix;
 
 #endif // MAX7219_MATRIX_LEDS_8X32_H
