@@ -14,8 +14,6 @@
 class LedMatrixMax7219
 {
 public:
-  ~LedMatrixMax7219() = default;
-
   void init();
 
   void putPixel(byte indexDigit, byte indexSegment, byte pixel);
