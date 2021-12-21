@@ -18,7 +18,7 @@ public:
 
   void setPixel(byte x, byte y, byte color);
   byte getPixel(byte x, byte y) const;
-  void setIntensity(byte a, byte b, byte c, byte d);
+  void setIntensity(byte a, byte b, byte c, byte d) const;
   void setPixelRange(byte x, byte y, byte colorBitfield);
 
   void displayScreen() const;
@@ -27,14 +27,14 @@ public:
 
 private:
   void initMax7219Component();
-  void initPins();
+  void initPins() const;
 
-  void sendBytesToMax7219(byte data);
-  void writeToRegister(byte registerNumber, byte data);
-  void writeToNextSegment(byte digitRegister, byte data);
+  void sendBytesToMax7219(byte data) const;
+  void writeToRegister(byte registerNumber, byte data) const;
+  void writeToNextSegment(byte digitRegister, byte data) const;
 
-  void beginWriteLine();
-  void endWriteLine();
+  void beginWriteLine() const;
+  void endWriteLine() const;
 
   void blankSegment(byte indexSegment);
 

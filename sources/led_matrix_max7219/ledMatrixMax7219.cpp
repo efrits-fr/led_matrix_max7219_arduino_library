@@ -15,7 +15,7 @@ void LedMatrixMax7219::init()
   displayScreen();
 }
 
-void LedMatrixMax7219::initPins()
+void LedMatrixMax7219::initPins() const
 {
   pinMode(clockPin, OUTPUT);
   pinMode(chipSelectPin, OUTPUT);
@@ -23,7 +23,7 @@ void LedMatrixMax7219::initPins()
   delay(500);
 }
 
-void LedMatrixMax7219::sendBytesToMax7219(byte data)
+void LedMatrixMax7219::sendBytesToMax7219(byte data) const
 {
   for (byte i = 0; i < 8; ++i)
   {
@@ -34,7 +34,7 @@ void LedMatrixMax7219::sendBytesToMax7219(byte data)
    }
 }
 
-void LedMatrixMax7219::setIntensity(byte a, byte b, byte c, byte d)
+void LedMatrixMax7219::setIntensity(byte a, byte b, byte c, byte d) const
 {
   digitalWrite(chipSelectPin, LOW);
   writeToRegister(intensityRegister, a);
@@ -44,7 +44,7 @@ void LedMatrixMax7219::setIntensity(byte a, byte b, byte c, byte d)
   digitalWrite(chipSelectPin, HIGH);
 }
 
-void LedMatrixMax7219::writeToRegister(byte registerNumber, byte data)
+void LedMatrixMax7219::writeToRegister(byte registerNumber, byte data) const
 {
   digitalWrite(chipSelectPin, LOW);
   sendBytesToMax7219(registerNumber);
@@ -62,18 +62,18 @@ void LedMatrixMax7219::initMax7219Component()
   delay(500);
 }
 
-void LedMatrixMax7219::writeToNextSegment(byte digitRegister, byte data)
+void LedMatrixMax7219::writeToNextSegment(byte digitRegister, byte data) const
 {
   sendBytesToMax7219(digitRegister);
   sendBytesToMax7219(data);
 }
 
-void LedMatrixMax7219::beginWriteLine()
+void LedMatrixMax7219::beginWriteLine() const
 {
   digitalWrite(chipSelectPin, LOW);
 }
 
-void LedMatrixMax7219::endWriteLine()
+void LedMatrixMax7219::endWriteLine() const
 {
   digitalWrite(chipSelectPin, HIGH);
 }
@@ -93,12 +93,10 @@ void LedMatrixMax7219::blankSegment(byte indexSegment)
 {
   for (byte y = 0; y < getHeight(); ++y)
     for (byte x = 0; x < maxSegment; ++x)
-      {
-	setPixelRange(x, y, 0x00);
-      }
+      setPixelRange(x, y, 0x00);
 }
 
-void Ledmatrixmax7219::setPixelRange(byte x, byte y, byte colorBitfield)
+void LedMatrixMax7219::setPixelRange(byte x, byte y, byte colorBitfield)
 {
   matrix[y][x] = colorBitfield;
 }
