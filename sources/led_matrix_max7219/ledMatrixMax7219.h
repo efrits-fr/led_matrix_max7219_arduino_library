@@ -18,7 +18,7 @@ public:
 
   void setPixel(byte x, byte y, byte color);
   byte getPixel(byte x, byte y) const;
-  void setIntensity(byte a, byte b, byte c, byte d);
+  void setIntensity((byte intensity_for_matrix_a, byte intensity_for_matrix_b, byte intensity_for_matrix_c, byte intensity_for_matrix_d));
   void setPixelRange(byte x, byte y, byte colorBitfield);
 
   void displayScreen() const;
