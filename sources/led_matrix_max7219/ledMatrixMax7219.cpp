@@ -34,13 +34,13 @@ void LedMatrixMax7219::sendBytesToMax7219(byte data) const
    }
 }
 
-void LedMatrixMax7219::setIntensity(byte a, byte b, byte c, byte d) const
+void LedMatrixMax7219::setIntensity(byte intensity_for_matrix_a, byte intensity_for_matrix_b, byte intensity_for_matrix_c, byte intensity_for_matrix_d) const
 {
   digitalWrite(chipSelectPin, LOW);
-  writeToRegister(intensityRegister, a);
-  writeToRegister(intensityRegister, b);
-  writeToRegister(intensityRegister, c);
-  writeToRegister(intensityRegister, d);
+  writeToRegister(intensityRegister, intensity_for_matrix_a);
+  writeToRegister(intensityRegister, intensity_for_matrix_b);
+  writeToRegister(intensityRegister, intensity_for_matrix_c);
+  writeToRegister(intensityRegister, intensity_for_matrix_d);
   digitalWrite(chipSelectPin, HIGH);
 }
 
@@ -121,14 +121,3 @@ byte LedMatrixMax7219::getPixel(byte x, byte y) const
 
   return ((*target >> pixel) & 1);
 }
-
-byte LedMatrixMax7219::getWidth() const
-{
-  return (maxSegment * 8);
-}
-
-byte LedMatrixMax7219::getHeight() const
-{
-  return (maxDigit);
-}
-
