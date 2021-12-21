@@ -123,14 +123,3 @@ byte LedMatrixMax7219::getPixel(byte x, byte y) const
 
   return ((*target >> pixel) & 1);
 }
-
-byte LedMatrixMax7219::getWidth() const
-{
-  return (maxSegment * 8);
-}
-
-byte LedMatrixMax7219::getHeight() const
-{
-  return (maxDigit);
-}
-
