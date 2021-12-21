@@ -22,8 +22,14 @@ public:
   void setPixelRange(byte x, byte y, byte colorBitfield);
 
   void displayScreen() const;
-  byte getWidth() const;
-  byte getHeight() const;
+  inline byte getWidth() const
+  {
+    return (maxSegment * 8);
+  }
+  inline byte getHeight() const
+  {
+    return (maxDigit);
+  }
 
 private:
   void initMax7219Component();
