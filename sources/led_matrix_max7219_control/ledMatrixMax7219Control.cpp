@@ -99,18 +99,18 @@ void ledMatrixMax7219Control::emptyModules()
 	}
 }
 
-void ledMatrixMax7219Control::setPixelRange(uint8_t x, uint8_t y, uint8_t lightingBitfield)
+void ledMatrixMax7219Control::setPixelRange(uint8_t x, uint8_t y, uint8_t colorBitfield)
 {
-	matrix[y][x] = lightingBitfield;
+	matrix[y][x] = colorBitfield;
 }
 
-void ledMatrixMax7219Control::setPixel(uint8_t x, uint8_t y, uint8_t lighting)
+void ledMatrixMax7219Control::setPixel(uint8_t x, uint8_t y, uint8_t color)
 {
 	uint8_t const bloc = x >> 3;
 	uint8_t const pixel = x - (bloc << 3);
 	uint8_t * target = &matrix[y][bloc];
 
-	if (lighting)
+	if (color)
 	{
 		*target |= 128 >> pixel;
 	}

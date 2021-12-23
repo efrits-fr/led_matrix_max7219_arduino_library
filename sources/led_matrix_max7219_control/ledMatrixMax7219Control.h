@@ -75,21 +75,21 @@ public:
 
 	/**
 	 * @brief The function setPixel
-	 * @details This function set a pixel lighting in x and y dot of the matrix
+	 * @details This function set a pixel color in x and y dot of the matrix
 	 *
 	 * @param[in] x is a coordinate of the matrix horizontal axis
 	 * @param[in] y is a coordinate of the matrix vertical axis
-	 * @param[in] lighting of the pixel
+	 * @param[in] color of the pixel
 	 */
-	void setPixel(uint8_t x, uint8_t y, uint8_t lighting);
+	void setPixel(uint8_t x, uint8_t y, uint8_t color);
 
 	/**
 	 * @brief The function getPixel
-	 * @details This function get a pixel lighting in x and y dot of the matrix
+	 * @details This function get a pixel color in x and y dot of the matrix
 	 *
 	 * @param[in] x is a coordinate of the matrix horizontal axis
 	 * @param[in] y is a coordinate of the matrix vertical axis
-	 * @return the pixel lighting
+	 * @return the pixel color
 	 */
 	uint8_t getPixel(uint8_t x, uint8_t y) const;
 
@@ -169,13 +169,13 @@ private:
 
 	/**
 	 * @brief The function setPixelRange
-	 * @details This function set a pixel lighting in x and y dot of the matrix
+	 * @details This function set a pixel color in x and y dot of the matrix
 	 *
 	 * @param[in] x is a coordinate of the matrix horizontal axis
 	 * @param[in] y is a coordinate of the matrix vertical axis
-	 * @param[in] lightingBitfield is the lighting of the pixel range
+	 * @param[in] colorBitfield is the color of the pixel range
 	 */
-	void setPixelRange(uint8_t x, uint8_t y, uint8_t lightingBitfield);
+	void setPixelRange(uint8_t x, uint8_t y, uint8_t colorBitfield);
 
 	/**
 	 * @brief The function emptyModules
