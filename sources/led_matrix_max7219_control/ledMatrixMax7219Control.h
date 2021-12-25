@@ -58,6 +58,13 @@ public:
 	};
 
 	/**
+	 * @brief The function ledMatrixMax7219Control
+	 *
+	 * @details This function construct the ledMatrixMax7219Control object
+	 */
+	ledMatrixMax7219Control();
+
+	/**
 	 * @brief The function init
 	 *
 	 * @details This function initialize the LED matrix MAX7219 component
@@ -114,6 +121,14 @@ public:
 	 * @return the screen height
 	 */
 	inline uint8_t getScreenHeight() const { return (screenHeight); }
+
+	/**
+	 * @brief The function clearScreen
+	 * @details This function clear the screen with the color provided
+	 *
+	 * @param[in] color of the pixel
+	 */
+	void clearScreen(uint8_t color);
 
 private:
 	/**
@@ -176,12 +191,6 @@ private:
 	 * @param[in] colorBitfield is the color of the pixel range
 	 */
 	void setPixelRange(uint8_t x, uint8_t y, uint8_t colorBitfield);
-
-	/**
-	 * @brief The function emptyModules
-	 * @details This function empty a module
-	 */
-	void emptyModules();
 
 	/**
 	 * @brief Register Identification
@@ -286,6 +295,7 @@ private:
 		RegisterId_Digit2,
 		RegisterId_Digit3,
 		RegisterId_Digit4,
+		RegisterId_Digit5,
 		RegisterId_Digit6,
 		RegisterId_Digit7
 	};

@@ -9,6 +9,22 @@
 #include "ledMatrixMax7219Control.h"
 #include <Arduino.h>
 
+ledMatrixMax7219Control::ledMatrixMax7219Control()
+{
+	clearScreen(0);
+}
+
+void ledMatrixMax7219Control::clearScreen(uint8_t color)
+{
+	for (uint8_t y = 0; y < matrixHeight; ++y)
+	{
+		for (uint8_t x = 0; x < matrixWidth; ++x)
+		{
+			setPixelRange(x, y, color ? 255 : 0);
+		}
+	}
+}
+
 void ledMatrixMax7219Control::init()
 {
 	initPins();
@@ -21,17 +37,16 @@ void ledMatrixMax7219Control::initPins() const
 	pinMode(clockPin, OUTPUT);
 	pinMode(chipSelectPin, OUTPUT);
 	pinMode(dataInPin, OUTPUT);
-	delay(500);
+	delay(50);
 }
 
 void ledMatrixMax7219Control::initMax7219() const
 {
 	writeDataToRegister(RegisterId_DecodeMode,  DecodeMode_LedMatrix);
-	writeDataToRegister(RegisterId_Intensity,   Brightness_MinIntensity);
+	writeDataToRegister(RegisterId_Intensity,   Brightness_Intensity1);
 	writeDataToRegister(RegisterId_ScanLimit,   ScanLimitHeight_8);
 	writeDataToRegister(RegisterId_Shutdown,    Shutdown_NormalMode);
 	writeDataToRegister(RegisterId_DisplayTest, DisplayMode_Normal);
-	delay(500);
 }
 
 void ledMatrixMax7219Control::setIntensityOfModules(ModuleId moduleId, Brightness intensity)
@@ -55,7 +70,8 @@ void ledMatrixMax7219Control::writeDataToModule(uint8_t registerId, uint8_t data
 
 void ledMatrixMax7219Control::writeDataToMax7219(uint8_t data) const
 {
-	for (uint8_t x = 0; x < matrixWidth; ++x)
+	digitalWrite(chipSelectPin, LOW);
+	for (uint8_t x = 0; x < matrixHeight; ++x)
 	{
 		digitalWrite(clockPin, LOW);
 		digitalWrite(dataInPin, data & 0x80);
@@ -76,26 +92,20 @@ void ledMatrixMax7219Control::endFrame() const
 
 void ledMatrixMax7219Control::displayScreen() const
 {
+	beginFrame();
+	for (uint8_t x = 0; x < matrixWidth; ++x)
+	{
+		writeDataToModule(RegisterId_Intensity, intensityOfModules[x]);
+	}
+	endFrame();
 	for (uint8_t y = 0; y < matrixHeight; ++y)
 	{
 		beginFrame();
 		for (uint8_t x = 0; x < matrixWidth; ++x)
 		{
-			writeDataToModule(RegisterId_Intensity, intensityOfModules[x]);
 			writeDataToModule(registerOfDigits[y], matrix[y][x]);
 		}
 		endFrame();
-	}
-}
-
-void ledMatrixMax7219Control::emptyModules()
-{
-	for (uint8_t y = 0; y < matrixHeight; ++y)
-	{
-		for (uint8_t x = 0; x < matrixWidth; ++x)
-		{
-			setPixelRange(x, y, EmptyPixel);
-		}
 	}
 }
 

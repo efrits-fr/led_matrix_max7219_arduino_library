@@ -31,6 +31,7 @@ void setup_ball(t_ball *ball)
 void setup() 
 {
   matrix.init();
+  matrix.clearScreen(1);
   randomSeed(analogRead(0));
   for (int i = 0; i < sizeof(balls) / sizeof(balls[0]); ++i)
     setup_ball(&balls[i]);
@@ -63,6 +64,11 @@ void loop()
       move_ball(&balls[i]);
       display_ball(&balls[i], 1);
     }
+  matrix.setIntensityOfModules(ledMatrixMax7219Control::ModuleId_1, ledMatrixMax7219Control::Brightness_Intensity1);
+  matrix.setIntensityOfModules(ledMatrixMax7219Control::ModuleId_2, ledMatrixMax7219Control::Brightness_MaxIntensity);
+  matrix.setIntensityOfModules(ledMatrixMax7219Control::ModuleId_3, ledMatrixMax7219Control::Brightness_Intensity1);
+  matrix.setIntensityOfModules(ledMatrixMax7219Control::ModuleId_4, ledMatrixMax7219Control::Brightness_MaxIntensity);
+
   matrix.displayScreen();
   delay(10);
 }
