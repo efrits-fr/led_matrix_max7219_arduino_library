@@ -85,5 +85,5 @@ void loop()
 
   matrix.displayScreen();
   ++countLoop;
-  delay(500);
+  delay(10);
 }
