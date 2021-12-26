@@ -218,7 +218,7 @@ private:
 	 */
 	enum ScanLimit
 	{
-		ScanLimit_1 = 1,
+		ScanLimit_1,
 		ScanLimit_2,
 		ScanLimit_3,
 		ScanLimit_4,
