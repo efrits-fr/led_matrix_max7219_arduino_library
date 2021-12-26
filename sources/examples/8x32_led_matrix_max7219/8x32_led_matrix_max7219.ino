@@ -44,10 +44,10 @@ void setup()
     setupBall(&balls[i]);
   }
 
-  matrix.setIntensityOfChipset(ledMatrixMax7219Control::ChipsetId_1, ledMatrixMax7219Control::Intensity_0);
-  matrix.setIntensityOfChipset(ledMatrixMax7219Control::ChipsetId_2, ledMatrixMax7219Control::Intensity_15);
-  matrix.setIntensityOfChipset(ledMatrixMax7219Control::ChipsetId_3, ledMatrixMax7219Control::Intensity_0);
-  matrix.setIntensityOfChipset(ledMatrixMax7219Control::ChipsetId_4, ledMatrixMax7219Control::Intensity_15);
+  matrix.setBrightnessOfLEDMatrix(ledMatrixMax7219Control::ChipsetId_1, ledMatrixMax7219Control::Intensity_0);
+  matrix.setBrightnessOfLEDMatrix(ledMatrixMax7219Control::ChipsetId_2, ledMatrixMax7219Control::Intensity_15);
+  matrix.setBrightnessOfLEDMatrix(ledMatrixMax7219Control::ChipsetId_3, ledMatrixMax7219Control::Intensity_0);
+  matrix.setBrightnessOfLEDMatrix(ledMatrixMax7219Control::ChipsetId_4, ledMatrixMax7219Control::Intensity_15);
 
 }
 

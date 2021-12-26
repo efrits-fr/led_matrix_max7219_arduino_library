@@ -89,7 +89,7 @@ void ledMatrixMax7219Control::displayScreen() const
 	beginLoadWord();
 	for (uint8_t x = 0; x < matrixWidth; ++x)
 	{
-		loadWordToChipset(RegisterId_Intensity, chipsetsIntensity[x]);
+		loadWordToChipset(RegisterId_Intensity, brightnessOfLEDMatrix[x]);
 	}
 	endLoadWord();
 	for (uint8_t y = 0; y < matrixHeight; ++y)

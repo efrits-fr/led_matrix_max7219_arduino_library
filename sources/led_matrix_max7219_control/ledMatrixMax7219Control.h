@@ -72,13 +72,13 @@ public:
 	void init();
 
 	/**
-	 * @brief The function setIntensityOfChipset
-	 * @details This function
+	 * @brief The function setBrightnessOfLEDMatrix
+	 * @details This function set the brightness intensity of the LED matrix chipset
 	 *
 	 * @param[in] chipsetId is identification of the LED matrix chipset
 	 * @param[in] intensity of the LED
 	 */
-	inline void setIntensityOfChipset(ChipsetId chipsetId, Intensity intensity) { chipsetsIntensity[chipsetId] = intensity; }
+	inline void setBrightnessOfLEDMatrix(ChipsetId chipsetId, Intensity intensity) { brightnessOfLEDMatrix[chipsetId] = intensity; }
 
 	/**
 	 * @brief The function setPixel
@@ -299,7 +299,7 @@ private:
 		RegisterId_Digit6,
 		RegisterId_Digit7
 	};
-	uint8_t chipsetsIntensity[matrixWidth];
+	uint8_t brightnessOfLEDMatrix[matrixWidth];
 	uint8_t matrix[matrixHeight][matrixWidth];
 };
 
