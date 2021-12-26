@@ -20,28 +20,28 @@ class ledMatrixMax7219Control
 {
 public:
 	/**
-	 * @brief The enum Brightness
+	 * @brief The enum Intensity
 	 *
-	 * @details This enum is the screen brightness intensity
+	 * @details This enum is the screen intensity of the LED
 	 */
-	enum Brightness
+	enum Intensity
 	{
-		Brightness_MinIntensity,
-		Brightness_Intensity1,
-		Brightness_Intensity2,
-		Brightness_Intensity3,
-		Brightness_Intensity4,
-		Brightness_Intensity5,
-		Brightness_Intensity6,
-		Brightness_Intensity7,
-		Brightness_Intensity8,
-		Brightness_Intensity9,
-		Brightness_Intensity10,
-		Brightness_Intensity11,
-		Brightness_Intensity12,
-		Brightness_Intensity13,
-		Brightness_Intensity14,
-		Brightness_MaxIntensity
+		Intensity_0,
+		Intensity_1,
+		Intensity_2,
+		Intensity_3,
+		Intensity_4,
+		Intensity_5,
+		Intensity_6,
+		Intensity_7,
+		Intensity_8,
+		Intensity_9,
+		Intensity_10,
+		Intensity_11,
+		Intensity_12,
+		Intensity_13,
+		Intensity_14,
+		Intensity_15
 	};
 
 	/**
@@ -76,9 +76,9 @@ public:
 	 * @details This function
 	 *
 	 * @param[in] moduleId is identification of the LED matrix module
-	 * @param[in] intensity of the matrix brightness
+	 * @param[in] intensity of the LED
 	 */
-	void setIntensityOfModules(ModuleId moduleId, Brightness intensity);
+	inline void setIntensityOfModules(ModuleId moduleId, Intensity intensity) { intensityOfModules[moduleId] = intensity; }
 
 	/**
 	 * @brief The function setPixel
@@ -144,43 +144,43 @@ private:
 	void initMax7219() const;
 
 	/**
-	 * @brief The function beginFrame
-	 * @details This function begin the frame to write to the Max7219 component
+	 * @brief The function beginLoadWord
+	 * @details This function indicate to the Max7219 component the beginning of a serial data transmission
 	 */
-	void beginFrame() const;
+	void beginLoadWord() const;
 
 	/**
-	 * @brief The function endFrame
-	 * @details This function end the frame to write to the Max7219 component
+	 * @brief The function endLoadWord
+	 * @details This function indicate to the Max7219 component the ending of a serial data transmission
 	 */
-	void endFrame() const;
+	void endLoadWord() const;
 
 	/**
-	 * @brief The function writeDataToModule
-	 * @details This function send data to the next register.
-	 * Required to call beginFrame() before first used and endFrame() at the end of used.
+	 * @brief The function loadWordTochip
+	 * @details This function load a word (16-bit data) to the chip
+	 * Required to call beginLoadWord() before first used and endLoadWord() at the end of used.
 	 *
 	 * @param[in] registerId is register identification of the Max7219 component
 	 * @param[in] data to send to the Max7219 component
 	 */
-	void writeDataToModule(uint8_t registerId, uint8_t data) const;
+	void loadWordTochip(uint8_t registerId, uint8_t data) const;
 
 	/**
-	 * @brief The function writeDataToRegister
-	 * @details This function write data to a register
+	 * @brief The function writeWordToChip
+	 * @details This function write a word (16-bit data) to a chip
 	 *
 	 * @param[in] registerId is register identification of the Max7219 component
 	 * @param[in] data to send to the Max7219 component
 	 */
-	void writeDataToRegister(uint8_t registerId, uint8_t data) const;
+	void writeWordToChip(uint8_t registerId, uint8_t data) const;
 
 	/**
-	 * @brief The function writeDataToMax7219
+	 * @brief The function writeDataToChip
 	 * @details This function write data to the Max7219 component
 	 *
 	 * @param[in] data to send to the Max7219 component
 	 */
-	void writeDataToMax7219(uint8_t data) const;
+	void writeDataToChip(uint8_t data) const;
 
 	/**
 	 * @brief The function setPixelRange
@@ -216,16 +216,16 @@ private:
 	/**
 	 * @brief Sccan limit values
 	 */
-	enum ScanLimitHeight
+	enum ScanLimit
 	{
-		ScanLimitHeight_1,
-		ScanLimitHeight_2,
-		ScanLimitHeight_3,
-		ScanLimitHeight_4,
-		ScanLimitHeight_5,
-		ScanLimitHeight_6,
-		ScanLimitHeight_7,
-		ScanLimitHeight_8
+		ScanLimit_1 = 1,
+		ScanLimit_2,
+		ScanLimit_3,
+		ScanLimit_4,
+		ScanLimit_5,
+		ScanLimit_6,
+		ScanLimit_7,
+		ScanLimit_8
 	};
 
 	/**
@@ -233,17 +233,17 @@ private:
 	 */
 	enum Shutdown
 	{
-		Shutdown_PowerDown,
-		Shutdown_NormalMode
+		Shutdown_ShutdownMode,
+		Shutdown_NormalOperation
 	};
 
 	/**
 	 * @brief Display mode values
 	 */
-	enum DisplayMode
+	enum DisplayTest
 	{
-		DisplayMode_Normal,
-		DisplayMode_Test
+		DisplayTest_NormalOperation,
+		DisplayTest_DisplayTestMode
 	};
 
 	/**
@@ -256,16 +256,16 @@ private:
 	};
 
 	/**
-	 * @brief Empty pixel value
+	 * @brief Length of a data to write
 	 */
-	enum { EmptyPixel   = 0x00 };
+	enum { DataLen = 8 };
 
 	/**
 	 * @brief Pins definition
 	 */
-	static uint8_t const clockPin      = 10;
-	static uint8_t const chipSelectPin = 11;
-	static uint8_t const dataInPin     = 12;
+	static uint8_t const clockPin   = 10;
+	static uint8_t const loadPin 	= 11;
+	static uint8_t const dataInPin  = 12;
 
 	/**
 	 * @brief Matrix height, y
