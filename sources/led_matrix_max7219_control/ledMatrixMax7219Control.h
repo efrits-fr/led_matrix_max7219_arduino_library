@@ -20,42 +20,49 @@ class ledMatrixMax7219Control
 {
 public:
 	/**
-	 * @brief The enum Brightness
+	 * @brief The enum Intensity
 	 *
-	 * @details This enum is the screen brightness intensity
+	 * @details This enum is the screen intensity of the LED
 	 */
-	enum Brightness
+	enum Intensity
 	{
-		Brightness_MinIntensity,
-		Brightness_Intensity1,
-		Brightness_Intensity2,
-		Brightness_Intensity3,
-		Brightness_Intensity4,
-		Brightness_Intensity5,
-		Brightness_Intensity6,
-		Brightness_Intensity7,
-		Brightness_Intensity8,
-		Brightness_Intensity9,
-		Brightness_Intensity10,
-		Brightness_Intensity11,
-		Brightness_Intensity12,
-		Brightness_Intensity13,
-		Brightness_Intensity14,
-		Brightness_MaxIntensity
+		Intensity_0,
+		Intensity_1,
+		Intensity_2,
+		Intensity_3,
+		Intensity_4,
+		Intensity_5,
+		Intensity_6,
+		Intensity_7,
+		Intensity_8,
+		Intensity_9,
+		Intensity_10,
+		Intensity_11,
+		Intensity_12,
+		Intensity_13,
+		Intensity_14,
+		Intensity_15
 	};
 
 	/**
-	 * @brief The enum ModuleId
+	 * @brief The enum ChipsetId
 	 *
-	 * @details This enum is the module identificator of the LED matrix MAX7219 component
+	 * @details This enum is the chipset identificator of the LED matrix MAX7219 component
 	 */
-	enum ModuleId
+	enum ChipsetId
 	{
-		ModuleId_1,
-		ModuleId_2,
-		ModuleId_3,
-		ModuleId_4
+		ChipsetId_1,
+		ChipsetId_2,
+		ChipsetId_3,
+		ChipsetId_4
 	};
+
+	/**
+	 * @brief The function ledMatrixMax7219Control
+	 *
+	 * @details This function construct the ledMatrixMax7219Control object
+	 */
+	ledMatrixMax7219Control();
 
 	/**
 	 * @brief The function init
@@ -65,13 +72,13 @@ public:
 	void init();
 
 	/**
-	 * @brief The function setIntensityOfModules
-	 * @details This function
+	 * @brief The function setBrightnessOfLEDMatrix
+	 * @details This function set the brightness intensity of the LED matrix chipset
 	 *
-	 * @param[in] moduleId is identification of the LED matrix module
-	 * @param[in] intensity of the matrix brightness
+	 * @param[in] chipsetId is identification of the LED matrix chipset
+	 * @param[in] intensity of the LED
 	 */
-	void setIntensityOfModules(ModuleId moduleId, Brightness intensity);
+	inline void setBrightnessOfLEDMatrix(ChipsetId chipsetId, Intensity intensity) { brightnessOfLEDMatrix[chipsetId] = intensity; }
 
 	/**
 	 * @brief The function setPixel
@@ -115,6 +122,14 @@ public:
 	 */
 	inline uint8_t getScreenHeight() const { return (screenHeight); }
 
+	/**
+	 * @brief The function clearScreen
+	 * @details This function clear the screen with the color provided
+	 *
+	 * @param[in] color of the pixel
+	 */
+	void clearScreen(uint8_t color);
+
 private:
 	/**
 	 * @brief The function initPins
@@ -129,43 +144,43 @@ private:
 	void initMax7219() const;
 
 	/**
-	 * @brief The function beginFrame
-	 * @details This function begin the frame to write to the Max7219 component
+	 * @brief The function beginLoadWord
+	 * @details This function indicate to the Max7219 component the beginning of a serial data transmission
 	 */
-	void beginFrame() const;
+	void beginLoadWord() const;
 
 	/**
-	 * @brief The function endFrame
-	 * @details This function end the frame to write to the Max7219 component
+	 * @brief The function endLoadWord
+	 * @details This function indicate to the Max7219 component the ending of a serial data transmission
 	 */
-	void endFrame() const;
+	void endLoadWord() const;
 
 	/**
-	 * @brief The function writeDataToModule
-	 * @details This function send data to the next register.
-	 * Required to call beginFrame() before first used and endFrame() at the end of used.
+	 * @brief The function loadWordToChipset
+	 * @details This function load a word (16-bit data) to the chipset
+	 * Required to call beginLoadWord() before first used and endLoadWord() at the end of used.
 	 *
 	 * @param[in] registerId is register identification of the Max7219 component
 	 * @param[in] data to send to the Max7219 component
 	 */
-	void writeDataToModule(uint8_t registerId, uint8_t data) const;
+	void loadWordToChipset(uint8_t registerId, uint8_t data) const;
 
 	/**
-	 * @brief The function writeDataToRegister
-	 * @details This function write data to a register
+	 * @brief The function writeWordToChipset
+	 * @details This function write a word (16-bit data) to a chipset
 	 *
 	 * @param[in] registerId is register identification of the Max7219 component
 	 * @param[in] data to send to the Max7219 component
 	 */
-	void writeDataToRegister(uint8_t registerId, uint8_t data) const;
+	void writeWordToChipset(uint8_t registerId, uint8_t data) const;
 
 	/**
-	 * @brief The function writeDataToMax7219
+	 * @brief The function writeDataToChipset
 	 * @details This function write data to the Max7219 component
 	 *
 	 * @param[in] data to send to the Max7219 component
 	 */
-	void writeDataToMax7219(uint8_t data) const;
+	void writeDataToChipset(uint8_t data) const;
 
 	/**
 	 * @brief The function setPixelRange
@@ -176,12 +191,6 @@ private:
 	 * @param[in] colorBitfield is the color of the pixel range
 	 */
 	void setPixelRange(uint8_t x, uint8_t y, uint8_t colorBitfield);
-
-	/**
-	 * @brief The function emptyModules
-	 * @details This function empty a module
-	 */
-	void emptyModules();
 
 	/**
 	 * @brief Register Identification
@@ -207,16 +216,16 @@ private:
 	/**
 	 * @brief Sccan limit values
 	 */
-	enum ScanLimitHeight
+	enum ScanLimit
 	{
-		ScanLimitHeight_1,
-		ScanLimitHeight_2,
-		ScanLimitHeight_3,
-		ScanLimitHeight_4,
-		ScanLimitHeight_5,
-		ScanLimitHeight_6,
-		ScanLimitHeight_7,
-		ScanLimitHeight_8
+		ScanLimit_1,
+		ScanLimit_2,
+		ScanLimit_3,
+		ScanLimit_4,
+		ScanLimit_5,
+		ScanLimit_6,
+		ScanLimit_7,
+		ScanLimit_8
 	};
 
 	/**
@@ -224,17 +233,17 @@ private:
 	 */
 	enum Shutdown
 	{
-		Shutdown_PowerDown,
-		Shutdown_NormalMode
+		Shutdown_ShutdownMode,
+		Shutdown_NormalOperation
 	};
 
 	/**
 	 * @brief Display mode values
 	 */
-	enum DisplayMode
+	enum DisplayTest
 	{
-		DisplayMode_Normal,
-		DisplayMode_Test
+		DisplayTest_NormalOperation,
+		DisplayTest_DisplayTestMode
 	};
 
 	/**
@@ -247,16 +256,16 @@ private:
 	};
 
 	/**
-	 * @brief Empty pixel value
+	 * @brief Length of a data to write
 	 */
-	enum { EmptyPixel   = 0x00 };
+	enum { DataLen = 8 };
 
 	/**
 	 * @brief Pins definition
 	 */
-	static uint8_t const clockPin      = 10;
-	static uint8_t const chipSelectPin = 11;
-	static uint8_t const dataInPin     = 12;
+	static uint8_t const clockPin   = 10;
+	static uint8_t const loadPin 	= 11;
+	static uint8_t const dataInPin  = 12;
 
 	/**
 	 * @brief Matrix height, y
@@ -286,10 +295,11 @@ private:
 		RegisterId_Digit2,
 		RegisterId_Digit3,
 		RegisterId_Digit4,
+		RegisterId_Digit5,
 		RegisterId_Digit6,
 		RegisterId_Digit7
 	};
-	uint8_t intensityOfModules[matrixWidth];
+	uint8_t brightnessOfLEDMatrix[matrixWidth];
 	uint8_t matrix[matrixHeight][matrixWidth];
 };
 

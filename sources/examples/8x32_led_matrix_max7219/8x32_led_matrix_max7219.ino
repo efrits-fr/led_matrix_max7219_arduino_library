@@ -8,61 +8,84 @@
 
 #include <ledMatrixMax7219Control.h>
 
+enum { NbBalls = 3 };
+enum { CountMax = 500 };
+
 ledMatrixMax7219Control matrix;
+
+uint8_t countLoop = 0;
 
 typedef struct s_ball
 {
   float x;
   float y;
-  float xspeed;
-  float yspeed;
+  float xSpeed;
+  float ySpeed;
 } t_ball;
 
-t_ball balls[3];
+t_ball balls[NbBalls];
 
-void setup_ball(t_ball *ball)
+void setupBall(t_ball * ball)
 {
   ball->x = random(matrix.getScreenWidth());
   ball->y = random(matrix.getScreenHeight());
-  ball->xspeed = random(-10, 10) / 10.0;
-  ball->yspeed = random(-10, 10) / 10.0;
+  ball->xSpeed = random(-10, 10) / 10.0;
+  ball->ySpeed = random(-10, 10) / 10.0;
 }
 
-void setup() 
+void setup()
 {
   matrix.init();
+  matrix.clearScreen(1);
+  
   randomSeed(analogRead(0));
-  for (int i = 0; i < sizeof(balls) / sizeof(balls[0]); ++i)
-    setup_ball(&balls[i]);
+  for (uint8_t i = 0; i < NbBalls; ++i)
+  {
+    setupBall(&balls[i]);
+  }
+
+  matrix.setBrightnessOfLEDMatrix(ledMatrixMax7219Control::ChipsetId_1, ledMatrixMax7219Control::Intensity_0);
+  matrix.setBrightnessOfLEDMatrix(ledMatrixMax7219Control::ChipsetId_2, ledMatrixMax7219Control::Intensity_15);
+  matrix.setBrightnessOfLEDMatrix(ledMatrixMax7219Control::ChipsetId_3, ledMatrixMax7219Control::Intensity_0);
+  matrix.setBrightnessOfLEDMatrix(ledMatrixMax7219Control::ChipsetId_4, ledMatrixMax7219Control::Intensity_15);
+
 }
 
-void move_ball(t_ball *ball)
+void moveBall(t_ball * ball)
 {
-  if ((ball->x += ball->xspeed) < 0 || ball->x >= matrix.getScreenWidth())
-    {
-      ball->xspeed *= -1;
-      ball->x += ball->xspeed;
-    }
-  if ((ball->y += ball->yspeed) < 0 || ball->y >= matrix.getScreenHeight())
-    {
-      ball->yspeed *= -1;
-      ball->y += ball->yspeed;
-    }
+  if ((ball->x += ball->xSpeed) < 0 || ball->x >= matrix.getScreenWidth())
+  {
+    ball->xSpeed *= -1;
+    ball->x += ball->xSpeed;
+  }
+  if ((ball->y += ball->ySpeed) < 0 || ball->y >= matrix.getScreenHeight())
+  {
+    ball->ySpeed *= -1;
+    ball->y += ball->ySpeed;
+  }
 }
 
-void display_ball(t_ball *ball, uint8_t color)
+void displayBall(t_ball * ball, uint8_t color)
 {
   matrix.setPixel(ball->x, ball->y, color);
 }
 
 void loop() 
 {
-  for (int i = 0; i < sizeof(balls) / sizeof(balls[0]); ++i)
-    {
-      display_ball(&balls[i], 0);
-      move_ball(&balls[i]);
-      display_ball(&balls[i], 1);
-    }
+  if (countLoop == CountMax)
+  {
+    matrix.clearScreen(1);
+    countLoop = 0;
+  }
+  
+  for (uint8_t i = 0; i < NbBalls; ++i)
+  {
+    displayBall(&balls[i], 0);
+    moveBall(&balls[i]);
+    displayBall(&balls[i], 1);
+  }
+  
   matrix.displayScreen();
+  ++countLoop;
   delay(10);
 }
