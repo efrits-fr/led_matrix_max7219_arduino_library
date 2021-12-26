@@ -45,16 +45,16 @@ public:
 	};
 
 	/**
-	 * @brief The enum ModuleId
+	 * @brief The enum ChipsetId
 	 *
-	 * @details This enum is the module identificator of the LED matrix MAX7219 component
+	 * @details This enum is the chipset identificator of the LED matrix MAX7219 component
 	 */
-	enum ModuleId
+	enum ChipsetId
 	{
-		ModuleId_1,
-		ModuleId_2,
-		ModuleId_3,
-		ModuleId_4
+		ChipsetId_1,
+		ChipsetId_2,
+		ChipsetId_3,
+		ChipsetId_4
 	};
 
 	/**
@@ -72,13 +72,13 @@ public:
 	void init();
 
 	/**
-	 * @brief The function setIntensityOfModules
+	 * @brief The function setIntensityOfChipset
 	 * @details This function
 	 *
-	 * @param[in] moduleId is identification of the LED matrix module
+	 * @param[in] chipsetId is identification of the LED matrix chipset
 	 * @param[in] intensity of the LED
 	 */
-	inline void setIntensityOfModules(ModuleId moduleId, Intensity intensity) { intensityOfModules[moduleId] = intensity; }
+	inline void setIntensityOfChipset(ChipsetId chipsetId, Intensity intensity) { chipsetsIntensity[chipsetId] = intensity; }
 
 	/**
 	 * @brief The function setPixel
@@ -156,31 +156,31 @@ private:
 	void endLoadWord() const;
 
 	/**
-	 * @brief The function loadWordTochip
-	 * @details This function load a word (16-bit data) to the chip
+	 * @brief The function loadWordToChipset
+	 * @details This function load a word (16-bit data) to the chipset
 	 * Required to call beginLoadWord() before first used and endLoadWord() at the end of used.
 	 *
 	 * @param[in] registerId is register identification of the Max7219 component
 	 * @param[in] data to send to the Max7219 component
 	 */
-	void loadWordTochip(uint8_t registerId, uint8_t data) const;
+	void loadWordToChipset(uint8_t registerId, uint8_t data) const;
 
 	/**
-	 * @brief The function writeWordToChip
-	 * @details This function write a word (16-bit data) to a chip
+	 * @brief The function writeWordToChipset
+	 * @details This function write a word (16-bit data) to a chipset
 	 *
 	 * @param[in] registerId is register identification of the Max7219 component
 	 * @param[in] data to send to the Max7219 component
 	 */
-	void writeWordToChip(uint8_t registerId, uint8_t data) const;
+	void writeWordToChipset(uint8_t registerId, uint8_t data) const;
 
 	/**
-	 * @brief The function writeDataToChip
+	 * @brief The function writeDataToChipset
 	 * @details This function write data to the Max7219 component
 	 *
 	 * @param[in] data to send to the Max7219 component
 	 */
-	void writeDataToChip(uint8_t data) const;
+	void writeDataToChipset(uint8_t data) const;
 
 	/**
 	 * @brief The function setPixelRange
@@ -299,7 +299,7 @@ private:
 		RegisterId_Digit6,
 		RegisterId_Digit7
 	};
-	uint8_t intensityOfModules[matrixWidth];
+	uint8_t chipsetsIntensity[matrixWidth];
 	uint8_t matrix[matrixHeight][matrixWidth];
 };
 

@@ -42,27 +42,27 @@ void ledMatrixMax7219Control::initPins() const
 
 void ledMatrixMax7219Control::initMax7219() const
 {
-	writeWordToChip(RegisterId_DecodeMode,  DecodeMode_LedMatrix);
-	writeWordToChip(RegisterId_Intensity,   Intensity_0);
-	writeWordToChip(RegisterId_ScanLimit,   ScanLimit_8);
-	writeWordToChip(RegisterId_Shutdown,    Shutdown_NormalOperation);
-	writeWordToChip(RegisterId_DisplayTest, DisplayTest_NormalOperation);
+	writeWordToChipset(RegisterId_DecodeMode,  DecodeMode_LedMatrix);
+	writeWordToChipset(RegisterId_Intensity,   Intensity_0);
+	writeWordToChipset(RegisterId_ScanLimit,   ScanLimit_8);
+	writeWordToChipset(RegisterId_Shutdown,    Shutdown_NormalOperation);
+	writeWordToChipset(RegisterId_DisplayTest, DisplayTest_NormalOperation);
 }
 
-void ledMatrixMax7219Control::writeWordToChip(uint8_t registerId, uint8_t data) const
+void ledMatrixMax7219Control::writeWordToChipset(uint8_t registerId, uint8_t data) const
 {
 	beginLoadWord();
-	loadWordTochip(registerId, data);
+	loadWordToChipset(registerId, data);
 	endLoadWord();
 }
 
-void ledMatrixMax7219Control::loadWordTochip(uint8_t registerId, uint8_t data) const
+void ledMatrixMax7219Control::loadWordToChipset(uint8_t registerId, uint8_t data) const
 {
-	writeDataToChip(registerId);
-	writeDataToChip(data);
+	writeDataToChipset(registerId);
+	writeDataToChipset(data);
 }
 
-void ledMatrixMax7219Control::writeDataToChip(uint8_t data) const
+void ledMatrixMax7219Control::writeDataToChipset(uint8_t data) const
 {
 	for (uint8_t x = 0; x < DataLen; ++x)
 	{
@@ -89,7 +89,7 @@ void ledMatrixMax7219Control::displayScreen() const
 	beginLoadWord();
 	for (uint8_t x = 0; x < matrixWidth; ++x)
 	{
-		loadWordTochip(RegisterId_Intensity, intensityOfModules[x]);
+		loadWordToChipset(RegisterId_Intensity, chipsetsIntensity[x]);
 	}
 	endLoadWord();
 	for (uint8_t y = 0; y < matrixHeight; ++y)
@@ -97,7 +97,7 @@ void ledMatrixMax7219Control::displayScreen() const
 		beginLoadWord();
 		for (uint8_t x = 0; x < matrixWidth; ++x)
 		{
-			loadWordTochip(registerOfDigits[y], matrix[y][x]);
+			loadWordToChipset(registerOfDigits[y], matrix[y][x]);
 		}
 		endLoadWord();
 	}

@@ -8,10 +8,11 @@
 
 #include <ledMatrixMax7219Control.h>
 
-#define BALL_SIZE 5
-#define COUNT_MAX 500
+enum { NbBalls = 3 };
+enum { CountMax = 500 };
 
 ledMatrixMax7219Control matrix;
+
 uint8_t countLoop = 0;
 
 typedef struct s_ball
@@ -22,9 +23,9 @@ typedef struct s_ball
   float ySpeed;
 } t_ball;
 
-t_ball balls[BALL_SIZE];
+t_ball balls[NbBalls];
 
-void setup_ball(t_ball * ball)
+void setupBall(t_ball * ball)
 {
   ball->x = random(matrix.getScreenWidth());
   ball->y = random(matrix.getScreenHeight());
@@ -36,15 +37,21 @@ void setup()
 {
   matrix.init();
   matrix.clearScreen(1);
-  randomSeed(analogRead(0));
   
-  for (uint8_t i = 0; i < BALL_SIZE; ++i)
+  randomSeed(analogRead(0));
+  for (uint8_t i = 0; i < NbBalls; ++i)
   {
-    setup_ball(&balls[i]);
+    setupBall(&balls[i]);
   }
+
+  matrix.setIntensityOfChipset(ledMatrixMax7219Control::ChipsetId_1, ledMatrixMax7219Control::Intensity_0);
+  matrix.setIntensityOfChipset(ledMatrixMax7219Control::ChipsetId_2, ledMatrixMax7219Control::Intensity_15);
+  matrix.setIntensityOfChipset(ledMatrixMax7219Control::ChipsetId_3, ledMatrixMax7219Control::Intensity_0);
+  matrix.setIntensityOfChipset(ledMatrixMax7219Control::ChipsetId_4, ledMatrixMax7219Control::Intensity_15);
+
 }
 
-void move_ball(t_ball * ball)
+void moveBall(t_ball * ball)
 {
   if ((ball->x += ball->xSpeed) < 0 || ball->x >= matrix.getScreenWidth())
   {
@@ -58,31 +65,26 @@ void move_ball(t_ball * ball)
   }
 }
 
-void display_ball(t_ball *ball, uint8_t color)
+void displayBall(t_ball * ball, uint8_t color)
 {
   matrix.setPixel(ball->x, ball->y, color);
 }
 
 void loop() 
 {
-  if (countLoop == COUNT_MAX)
+  if (countLoop == CountMax)
   {
     matrix.clearScreen(1);
     countLoop = 0;
   }
   
-  for (uint8_t i = 0; i < BALL_SIZE; ++i)
+  for (uint8_t i = 0; i < NbBalls; ++i)
   {
-    display_ball(&balls[i], 0);
-    move_ball(&balls[i]);
-    display_ball(&balls[i], 1);
+    displayBall(&balls[i], 0);
+    moveBall(&balls[i]);
+    displayBall(&balls[i], 1);
   }
   
-  matrix.setIntensityOfModules(ledMatrixMax7219Control::ModuleId_1, ledMatrixMax7219Control::Intensity_0);
-  matrix.setIntensityOfModules(ledMatrixMax7219Control::ModuleId_2, ledMatrixMax7219Control::Intensity_15);
-  matrix.setIntensityOfModules(ledMatrixMax7219Control::ModuleId_3, ledMatrixMax7219Control::Intensity_0);
-  matrix.setIntensityOfModules(ledMatrixMax7219Control::ModuleId_4, ledMatrixMax7219Control::Intensity_15);
-
   matrix.displayScreen();
   ++countLoop;
   delay(10);
