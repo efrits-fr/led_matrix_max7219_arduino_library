@@ -193,6 +193,15 @@ private:
 	void setPixelRange(uint8_t x, uint8_t y, uint8_t colorBitfield);
 
 	/**
+	 * @brief The function getPixelRange
+	 * @details This function get a pixel color in x and y dot of the matrix
+	 *
+	 * @param[in] x is a coordinate of the matrix horizontal axis
+	 * @param[in] y is a coordinate of the matrix vertical axis
+	 */
+	uint8_t getPixelRange(uint8_t x, uint8_t y) const;
+
+	/**
 	 * @brief Register Identification
 	 */
 	enum RegisterId
