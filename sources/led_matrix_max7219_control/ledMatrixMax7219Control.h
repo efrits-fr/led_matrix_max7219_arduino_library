@@ -82,7 +82,7 @@ public:
 
 	/**
 	 * @brief The function setPixel
-	 * @details This function set a pixel color in x and y dot of the matrix
+	 * @details This function set a pixel color in x and y dot of the matrix. In case of overflow, it is handle by keeping the target inside.
 	 *
 	 * @param[in] x is a coordinate of the matrix horizontal axis
 	 * @param[in] y is a coordinate of the matrix vertical axis
@@ -92,7 +92,7 @@ public:
 
 	/**
 	 * @brief The function getPixel
-	 * @details This function get a pixel color in x and y dot of the matrix
+	 * @details This function get a pixel color in x and y dot of the matrix. In case of overflow, it is handle by keeping the target inside.
 	 *
 	 * @param[in] x is a coordinate of the matrix horizontal axis
 	 * @param[in] y is a coordinate of the matrix vertical axis
@@ -184,7 +184,7 @@ private:
 
 	/**
 	 * @brief The function setPixelRange
-	 * @details This function set a pixel color in x and y dot of the matrix
+	 * @details This function set a pixel color in x and y dot of the matrix. In case of overflow, it is handle by keeping the target inside.
 	 *
 	 * @param[in] x is a coordinate of the matrix horizontal axis
 	 * @param[in] y is a coordinate of the matrix vertical axis
