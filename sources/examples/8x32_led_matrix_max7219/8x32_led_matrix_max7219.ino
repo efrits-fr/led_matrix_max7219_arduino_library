@@ -20,7 +20,7 @@ float ballYSpeed;
 // How many loops are required before doing a screen clear again
 enum { CountMax = 500 };
 
-This function is only called once at startup to set up the demo
+// This function is only called once at startup to set up the demo
 void setup()
 {
   // Initialization of the matrix, allow it to work correctly
