@@ -110,6 +110,13 @@ void ledMatrixMax7219Control::setPixelRange(uint8_t x, uint8_t y, uint8_t colorB
 	matrix[y][x] = colorBitfield;
 }
 
+uint8_t ledMatrixMax7219Control::getPixelRange(uint8_t x, uint8_t y) const
+{
+	x &= matrixWidth - 1;
+	y &= matrixHeight - 1;
+	return (matrix[y][x]);
+}
+
 void ledMatrixMax7219Control::setPixel(uint8_t x, uint8_t y, uint8_t color)
 {
 	uint8_t const bloc = (x >> 3) & (matrixWidth - 1);
