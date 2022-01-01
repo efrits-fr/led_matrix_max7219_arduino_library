@@ -1,5 +1,7 @@
 # Prerequisites
 *.d
+*.zip
+.tmp
 
 # Object files
 *.o
