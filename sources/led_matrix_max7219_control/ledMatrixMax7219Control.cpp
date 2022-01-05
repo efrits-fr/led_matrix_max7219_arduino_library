@@ -42,17 +42,17 @@ void ledMatrixMax7219Control::initPins() const
 
 void ledMatrixMax7219Control::initMax7219() const
 {
-	writeWordToChipset(RegisterId_DecodeMode, DecodeMode_LedMatrix, matrixWidth);
-	writeWordToChipset(RegisterId_Intensity, Intensity_0, matrixWidth);
-	writeWordToChipset(RegisterId_ScanLimit, ScanLimit_8, matrixWidth);
-	writeWordToChipset(RegisterId_Shutdown, Shutdown_NormalOperation, matrixWidth);
-	writeWordToChipset(RegisterId_DisplayTest, DisplayTest_NormalOperation, matrixWidth);
+	writeWordToChipset(RegisterId_DecodeMode, DecodeMode_LedMatrix);
+	writeWordToChipset(RegisterId_Intensity, Intensity_0);
+	writeWordToChipset(RegisterId_ScanLimit, ScanLimit_8);
+	writeWordToChipset(RegisterId_Shutdown, Shutdown_NormalOperation);
+	writeWordToChipset(RegisterId_DisplayTest, DisplayTest_NormalOperation);
 }
 
-void ledMatrixMax7219Control::writeWordToChipset(uint8_t registerId, uint8_t data, uint8_t nbr_chipsets) const
+void ledMatrixMax7219Control::writeWordToChipset(uint8_t registerId, uint8_t data) const
 {
 	beginLoadWord();
-	for (uint8_t i = 0; i < nbr_chipsets; ++i)
+	for (uint8_t i = 0; i < matrixWidth; ++i)
 		loadWordToChipset(registerId, data);
 	endLoadWord();
 }
