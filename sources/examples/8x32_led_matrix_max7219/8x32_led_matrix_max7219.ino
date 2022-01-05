@@ -79,6 +79,7 @@ void loop()
       };
 
     resetBall();
+
     matrix.clearScreen(1);
     // Set different brightness levels of matrix, so a little variety appears when balls move from
     // a matrix to another one.
