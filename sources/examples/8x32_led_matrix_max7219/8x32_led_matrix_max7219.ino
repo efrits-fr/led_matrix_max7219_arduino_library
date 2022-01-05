@@ -21,17 +21,8 @@ enum { CountMax = 500 };
 int countLoop = CountMax;
 bool stepLoop = false;
 
-// This function is only called once at startup to set up the demo
-void setup()
+void resetBall()
 {
-  // Initialization of the matrix, allow it to work correctly
-  matrix.init();
-  // Fill the screen with activated pixels
-  matrix.clearScreen(1);
-
-  // Set a seed from an analog entry so the random generator generates differents values at each startup
-  randomSeed(analogRead(0));
-
   // Set the horizontal ball position somewhere between 0 and the width of the screen randomly
   ballX = random(matrix.getScreenWidth());
   // Set the vertical ball position somewhere between 0 and the height of the screen randomly
@@ -40,6 +31,15 @@ void setup()
   // ball does not follow perfectly horizontal or vertical lines
   while (fabs(ballXSpeed = random(-10, 10) / 10.0) < 0.2);
   while (fabs(ballYSpeed = random(-10, 10) / 10.0) < 0.2);
+}
+
+// This function is only called once at startup to set up the demo
+void setup()
+{
+  // Initialization of the matrix, allow it to work correctly
+  matrix.init();
+  // Set a seed from an analog entry so the random generator generates differents values at each startup
+  randomSeed(analogRead(0));
 }
 
 void moveBall()
@@ -77,6 +77,8 @@ void loop()
        ledMatrixMax7219Control::Intensity_0,
        ledMatrixMax7219Control::Intensity_15
       };
+
+    resetBall();
 
     matrix.clearScreen(1);
     // Set different brightness levels of matrix, so a little variety appears when balls move from
