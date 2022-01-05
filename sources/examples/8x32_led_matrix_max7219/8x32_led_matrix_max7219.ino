@@ -1,7 +1,7 @@
 /*
  * Lisa Monpierre
  * EFRITS SAS
- * 
+ *
  * MAX7219 Library
  * Dec. 2021
  */
@@ -12,13 +12,14 @@
 ledMatrixMax7219Control matrix;
 
 // Variables used for the animation
-uint8_t countLoop = 0;
 float ballX;
 float ballY;
 float ballXSpeed;
 float ballYSpeed;
 // How many loops are required before doing a screen clear again
 enum { CountMax = 500 };
+int countLoop = CountMax;
+bool stepLoop = false;
 
 // This function is only called once at startup to set up the demo
 void setup()
@@ -39,14 +40,6 @@ void setup()
   // ball does not follow perfectly horizontal or vertical lines
   while (fabs(ballXSpeed = random(-10, 10) / 10.0) < 0.2);
   while (fabs(ballYSpeed = random(-10, 10) / 10.0) < 0.2);
-
-  // Set different brightness levels of matrix, so a little variety appears when balls move from
-  // a matrix to another one.
-  matrix.setBrightnessOfLEDMatrix(ledMatrixMax7219Control::ChipsetId_1, ledMatrixMax7219Control::Intensity_0);
-  matrix.setBrightnessOfLEDMatrix(ledMatrixMax7219Control::ChipsetId_2, ledMatrixMax7219Control::Intensity_15);
-  matrix.setBrightnessOfLEDMatrix(ledMatrixMax7219Control::ChipsetId_3, ledMatrixMax7219Control::Intensity_0);
-  matrix.setBrightnessOfLEDMatrix(ledMatrixMax7219Control::ChipsetId_4, ledMatrixMax7219Control::Intensity_15);
-
 }
 
 void moveBall()
@@ -74,13 +67,26 @@ void displayBall(uint8_t color)
 }
 
 // This function is called repeatedly
-void loop() 
+void loop()
 {
   // We set the whole screen to ON every CountMax loops
   if (countLoop == CountMax)
   {
+    ledMatrixMax7219Control::Intensity intensity[2] =
+      {
+       ledMatrixMax7219Control::Intensity_0,
+       ledMatrixMax7219Control::Intensity_15
+      };
+
     matrix.clearScreen(1);
+    // Set different brightness levels of matrix, so a little variety appears when balls move from
+    // a matrix to another one.
+    matrix.setBrightnessOfLEDMatrix(ledMatrixMax7219Control::ChipsetId_1, intensity[stepLoop]);
+    matrix.setBrightnessOfLEDMatrix(ledMatrixMax7219Control::ChipsetId_2, intensity[!stepLoop]);
+    matrix.setBrightnessOfLEDMatrix(ledMatrixMax7219Control::ChipsetId_3, intensity[stepLoop]);
+    matrix.setBrightnessOfLEDMatrix(ledMatrixMax7219Control::ChipsetId_4, intensity[!stepLoop]);
     countLoop = 0;
+    stepLoop = !stepLoop;
   }
 
   // Remove the ball from screen (old position)

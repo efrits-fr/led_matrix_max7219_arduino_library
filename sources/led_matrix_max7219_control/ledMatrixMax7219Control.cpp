@@ -49,7 +49,7 @@ void ledMatrixMax7219Control::initMax7219() const
 	writeWordToChipset(RegisterId_DisplayTest, DisplayTest_NormalOperation);
 }
 
-void ledMatrixMax7219Control::writeWordToChipset(uint8_t registerId, uint8_t data) const
+void ledMatrixMax7219Control::writeWordToChipset(uint8_t registerId, uint8_t data, uint8_t nbr_chipsets) const
 {
 	beginLoadWord();
 	for (uint8_t i = 0; i < matrixWidth; ++i)
