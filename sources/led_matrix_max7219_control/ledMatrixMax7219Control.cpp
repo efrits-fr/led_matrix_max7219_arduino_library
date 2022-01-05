@@ -53,7 +53,9 @@ void ledMatrixMax7219Control::writeWordToChipset(uint8_t registerId, uint8_t dat
 {
 	beginLoadWord();
 	for (uint8_t i = 0; i < matrixWidth; ++i)
+	{
 		loadWordToChipset(registerId, data);
+	}
 	endLoadWord();
 }
 
