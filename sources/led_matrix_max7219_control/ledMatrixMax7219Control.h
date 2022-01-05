@@ -174,7 +174,7 @@ private:
 	 * @param[in] registerId is register identification of the Max7219 component
 	 * @param[in] data to send to the Max7219 component
 	 */
-	void writeWordToChipset(uint8_t registerId, uint8_t data, uint8_t nbr_chipsets = 1) const;
+	void writeWordToChipset(uint8_t registerId, uint8_t data) const;
 
 	/**
 	 * @brief The function writeDataToChipset
